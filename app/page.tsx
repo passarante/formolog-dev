@@ -1,113 +1,237 @@
-import Image from "next/image";
+import { CardBody, CardContainer, CardItem } from "@/components/global/3d-card";
+import AssignmentForm from "@/components/global/assignment-form";
+import { HeroParallax } from "@/components/global/connect-parallax";
+import { ContainerScroll } from "@/components/global/container-scroll-animation";
+import { InfiniteMovingCards } from "@/components/global/infinite-moving-cards";
+import { LampComponent } from "@/components/global/lamp";
+import Navbar from "@/components/global/navbar";
+import { Button } from "@/components/ui/button";
+import { clients, products } from "@/lib/constant";
+
+import { CheckIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main>
+      <Navbar />
+      <section className="h-screen w-full bg-neutral-950 rounded-md !overflow-visible relative flex flex-col items-center antialiased">
+        <div className="absolute inset-0  h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_35%,#223_100%)]"></div>
+        <div className="flex flex-col mt-[-100px] md:mt-[-50px]">
+          <ContainerScroll
+            titleComponent={
+              <div className="flex items-center flex-col">
+                <Button
+                  size={"lg"}
+                  className="p-8 mb-8 md:mb-0 text-2xl w-full sm:w-fit border-t-2 rounded-full border-[#4D4D4D] bg-[#1F1F1F] hover:bg-white group transition-all flex items-center justify-center gap-4 hover:shadow-xl hover:shadow-neutral-500 duration-500"
+                >
+                  <Link
+                    href="#form"
+                    className="bg-clip-text text-transparent bg-gradient-to-r from-neutral-500 to-neutral-600  md:text-center font-sans group-hover:bg-gradient-to-r group-hover:from-black goup-hover:to-black"
+                  >
+                    Hemen Başvur
+                  </Link>
+                </Button>
+                <h1 className="text-5xl md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-600 font-sans font-bold">
+                  Formolog olmaya hazır mısınız?
+                </h1>
+              </div>
+            }
+          />
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      </section>
+      {/* <InfiniteMovingCards
+        className="md:mt-[18rem] mt-[-100px]"
+        items={clients}
+        direction="right"
+        speed="slow"
+      /> */}
+      <section id="about" className="mt-40">
+        <HeroParallax products={products}></HeroParallax>
+      </section>
+      <section className="mt-[-500px]" id="features">
+        <LampComponent />
+        <div className="grid md:grid-cols-4 grid-cols-1 items-center justify-center flex-col md:flex-row gap-8 -mt-72">
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card min-h-64  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                <span className="border border-white-[1px] p-2 rounded-md mb-1 cursor-pointer  ">
+                  AN
+                </span>
+                <h2 className="text-3xl mt-2 ">Analist</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-4 dark:text-neutral-300 "
+              >
+                Müşteri ihtiyaçlarını analiz eden ve bunu tasarımcı formologlara
+                ileten formologlardır. Analitik düşünebilme ve enpati
+                yetenekleri analist formolog olmak için önemli kriterlerdir.
+              </CardItem>
+            </CardBody>
+          </CardContainer>
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card min-h-64  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                <span className="border border-white-[1px] p-2 rounded-md mb-1 cursor-pointer  ">
+                  TS
+                </span>
+                <h2 className="text-3xl mt-2 ">Tasarımcı</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-4 dark:text-neutral-300 "
+              >
+                Platform üzerinde form ve ekran tasarımları yapan formologtur.
+                Listeleri, raporları ve kontrol panellerini (dashboard)
+                oluşturur.
+              </CardItem>
+            </CardBody>
+          </CardContainer>
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card min-h-64  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                <span className="border border-white-[1px] p-2 rounded-md mb-1 cursor-pointer  ">
+                  KR
+                </span>
+                <h2 className="text-3xl mt-2 ">Kurulum Uzmanı</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-4 dark:text-neutral-300 "
+              >
+                Web tabanlı uygulamalar hazırladığımız için projelerin müşteri
+                sunucularına kurulum ve yedekleme işlemlerinden sorumlu
+                formologtur. Sunucu, donanım ve IIS ile ilgili teknik bilgi
+                gerektirir.
+              </CardItem>
+            </CardBody>
+          </CardContainer>
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card min-h-64  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                <span className="border border-white-[1px] p-2 rounded-md mb-1 cursor-pointer  ">
+                  EG
+                </span>
+                <h2 className="text-3xl mt-2 ">Eğitmen</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-4 dark:text-neutral-300 "
+              >
+                Tamamlanmış uygulamalar, formolog platformunun alt yapısı ve
+                tasarımların nasıl geçekleştirileceği hakkında eğitimleri veren
+                formologlardır.
+              </CardItem>
+            </CardBody>
+          </CardContainer>
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card min-h-64  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                <span className="border border-white-[1px] p-2 rounded-md mb-1 cursor-pointer  ">
+                  EN
+                </span>
+                <h2 className="text-3xl mt-2 ">Entegrasyon Uzmanı</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-4 dark:text-neutral-300 "
+              >
+                Farklı ticari programlar ve alt yapılar konusunda uzmanlaşmış ve
+                bu konularda tasarımcı formologlarla birlikte çözüm üreten
+                formologlardır. Planladığımız entegrasyon eğitimlerinde uzman
+                olduğunuz konularda yazılım geliştirebiliyor olacaksınız.
+              </CardItem>
+            </CardBody>
+          </CardContainer>
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card min-h-64  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                <span className="border border-white-[1px] p-2 rounded-md mb-1 cursor-pointer  ">
+                  ST
+                </span>
+                <h2 className="text-3xl mt-2 ">Satış Temsilcisi</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-4 dark:text-neutral-300 "
+              >
+                Hep yapmak olmaz birilerinin de satması gerekiyor. Formolog
+                eğitim noktalarından alacağınız eğitimler ile kısa sürede birçok
+                sektörde yazılım konusunda uzman bir formolog olacaksınız.
+              </CardItem>
+            </CardBody>
+          </CardContainer>
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card min-h-64  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                <span className="border border-white-[1px] p-2 rounded-md mb-1 cursor-pointer  ">
+                  BY
+                </span>
+                <h2 className="text-3xl mt-2 ">Çözüm Ortağı</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-4 dark:text-neutral-300 "
+              >
+                Veribis olarak Türkiye`de yazılım geliştirici firmalarla
+                yıllardır süregelen stratejik ortaklıklarımızı her geçen gün
+                güçlendiriyoruz. Çözüm ortağı formologlar kendi yazılımlarını
+                üretetip bizimle ya da kendi başlarına satış pazarlama
+                yapabilirler
+              </CardItem>
+            </CardBody>
+          </CardContainer>
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card min-h-64  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                <span className="border border-white-[1px] p-2 rounded-md mb-1 cursor-pointer  ">
+                  YZ
+                </span>
+                <h2 className="text-3xl mt-2 ">Yazılım Uzmanı</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-4 dark:text-neutral-300 "
+              >
+                Çalıştığı proje ihtiyaçlarına göre araştırma ve geliştirme
+                çalışmaları yapan, yazılım programları tasarlayan formologtur.
+                Bilişim çağının getirdiği teknolojik gelişmelere bağlı projeler
+                üretir.
+              </CardItem>
+            </CardBody>
+          </CardContainer>
+        </div>
+      </section>
+      <section id="form" className="mt-16  max-w-7xl  mx-auto">
+        <div className="p-4">
+          <AssignmentForm />
+        </div>
+      </section>
     </main>
   );
 }
