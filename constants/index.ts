@@ -1,0 +1,32 @@
+export const defaultDbTables = [
+
+
+    { name: "Notification" },
+    { name: "Activity" },
+    { name: "Company" },
+    { name: "Contact" },
+    { name: "DocumentDetail" },
+    { name: "Document" },
+    { name: "ProductWareHouse" },
+    { name: "Product" },
+    { name: "Report" },
+    { name: "Opportunity" },
+    { name: "CompanyRivals" },
+    { name: "Additional" },
+    { name: "ContactRelation" },
+    { name: "ReportData" },
+    { name: "Sample" },
+    { name: "Rival" },
+    { name: "CompanyRivalProduct" },
+    { name: "RivalPrice" },
+    { name: "RivalConsumption" },
+    { name: "MachineGroup" },
+    { name: "Machine" },
+    { name: "Target" },
+    { name: "TargetDetail" },
+    { name: "Vehicle" },
+    { name: "PriceList" },
+    { name: "ContractDetail" },
+    { name: "Barcode" },
+
+]

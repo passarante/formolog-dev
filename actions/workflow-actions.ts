@@ -11,7 +11,7 @@ export const getUserWorkflows = async (userId: string) => {
         const response = await prisma.workFlow.findMany({
             where: {
                 userId
-            }
+            },
         });
 
 
@@ -55,5 +55,20 @@ export const createWorkFlow = async (data: z.infer<typeof createWorkflowSchema>,
     } catch (error) {
         console.log("Error", error);
         return { error };
+    }
+}
+
+export const deleteUserWorkflow = async (workflowId: string) => {
+
+    try {
+        const response = await prisma.workFlow.delete({
+            where: {
+                id: workflowId
+            }
+        });
+        return { success: true, data: response }
+    } catch (error) {
+        console.log("Error", error);
+        return { success: false, error: "Sunucu hatası lütfen tekrar deneyin" }
     }
 }

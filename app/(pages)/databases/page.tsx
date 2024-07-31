@@ -32,15 +32,23 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { DatabaseWithWorkFlow } from "@/types";
+import {
+  deleteUserDatabase,
+  getUserDatabases,
+} from "@/actions/database-actions";
+import { useToast } from "@/components/ui/use-toast";
+import prisma from "@/lib/db";
 
 const DatabasesPage = () => {
-  const [workflows, setWorkflows] = useState<WorkFlow[]>([]);
+  const { toast } = useToast();
+  const [databases, setDatabases] = useState<DatabaseWithWorkFlow[]>([]);
 
   useEffect(() => {
-    getUserWorkflows("1")
+    getUserDatabases("1")
       .then((res) => {
         if (res && res.data) {
-          setWorkflows(res.data);
+          setDatabases(res.data);
         }
       })
       .catch((err) => {
@@ -48,11 +56,32 @@ const DatabasesPage = () => {
       });
   }, []);
 
+  const deleteDatabase = async (id: string) => {
+    try {
+      const response = await deleteUserDatabase(id);
+      if (response) {
+        console.log(response);
+        toast({
+          title: "Bilgi",
+          description: "Veritabanı silindi",
+        });
+        setDatabases((prev) => prev.filter((database) => database.id !== id));
+      }
+    } catch (error) {
+      console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Hata!",
+        description: "Veritabanı silinirken hata oluştu",
+      });
+    }
+  };
+
   return (
     <Card className="w-2/3 mx-auto">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>Projelerim</CardTitle>
-        <Link href="/workflows/create">
+        <CardTitle>Veritabanlarım</CardTitle>
+        <Link href="/databases/create">
           <Button size={"sm"} variant={"outline"}>
             <Plus className="w-4 h-4 mr-2" /> Yeni Ekle
           </Button>
@@ -60,32 +89,34 @@ const DatabasesPage = () => {
       </CardHeader>
       <CardContent className="flex w-full items-center justify-center ">
         <Table>
-          <TableCaption>Projeleriniz</TableCaption>
+          <TableCaption>Veritabanlarınız</TableCaption>
           <TableHeader>
             <TableRow>
+              <TableHead>Veritabanı Adı</TableHead>
               <TableHead>Proje Adı</TableHead>
-              <TableHead>Firma</TableHead>
               <TableHead>Açıklama</TableHead>
               <TableHead className="text-right">-</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {workflows.map((workflow) => (
-              <TableRow key={workflow.id}>
-                <TableCell className="font-medium">{workflow.name}</TableCell>
-                <TableCell>{workflow.company}</TableCell>
-                <TableCell>{workflow.description}</TableCell>
+            {databases.map((database) => (
+              <TableRow key={database.id}>
+                <TableCell className="font-medium">{database.name}</TableCell>
+                <TableCell>{database.workflow.name}</TableCell>
+                <TableCell>{database.description}</TableCell>
                 <TableCell className="text-right">
                   <TooltipProvider>
                     <div className=" space-x-2 ">
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button variant="outline" size={"icon"}>
-                            <Edit className="w-4 h-4" />
-                          </Button>
+                          <Link href={`/databases/edit/${database.id}`}>
+                            <Button variant="outline" size={"icon"}>
+                              <Edit className="w-4 h-4" />
+                            </Button>
+                          </Link>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Projenizin detayları</p>
+                          <p>Veritabanı detayları</p>
                         </TooltipContent>
                       </Tooltip>
 
@@ -98,17 +129,20 @@ const DatabasesPage = () => {
                         <AlertDialogContent>
                           <AlertDialogHeader>
                             <AlertDialogTitle>
-                              {`${workflow.name} projesini silmek istediginden emin misiniz?`}
+                              {`${database.name} veritabanını silmek istediginden emin misiniz?`}
                             </AlertDialogTitle>
                             <AlertDialogDescription>
-                              Bu işlem geri alınamaz, projeyi sildiğinizde
-                              projeye bağlı veritabanı ve form bilgileri de
-                              silinecektir.
+                              Bu işlem geri alınamaz, veritabanını sildiğinizde
+                              veritabanına bağlı tabloları da silinecektir.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
                             <AlertDialogCancel>İptal</AlertDialogCancel>
-                            <AlertDialogAction>Sil</AlertDialogAction>
+                            <AlertDialogAction
+                              onClick={() => deleteDatabase(database.id)}
+                            >
+                              Sil
+                            </AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>

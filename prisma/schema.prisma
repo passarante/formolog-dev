@@ -25,6 +25,7 @@ model Database{
    id             String       @id @default(uuid())
    name String
    description String?
+   userId String
    
    workflowId  String @unique
    workflow WorkFlow @relation(fields: [workflowId],references: [id] ,onDelete: Cascade)
@@ -49,3 +50,6 @@ model TableField{
    tableId String @unique
    table DatabaseTable @relation(fields: [tableId],references: [id] ,onDelete: Cascade)
 }
+
+
+

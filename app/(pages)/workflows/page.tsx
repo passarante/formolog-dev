@@ -13,7 +13,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Edit, Plus, Trash2 } from "lucide-react";
 import { WorkFlow } from "@prisma/client";
-import { getUserWorkflows } from "@/actions/workflow-actions";
+import {
+  deleteUserWorkflow,
+  getUserWorkflows,
+} from "@/actions/workflow-actions";
 import Link from "next/link";
 import {
   Tooltip,
@@ -32,8 +35,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 const WorkflowsPage = () => {
+  const router = useRouter();
+  const { toast } = useToast();
+
   const [workflows, setWorkflows] = useState<WorkFlow[]>([]);
 
   useEffect(() => {
@@ -47,6 +55,28 @@ const WorkflowsPage = () => {
         console.log("ERR", err);
       });
   }, []);
+
+  const deleteWorkflow = async (workflowId: string) => {
+    try {
+      const response = await deleteUserWorkflow(workflowId);
+      if (response.success) {
+        toast({
+          title: "Bilgi",
+          description: "Proje silindi",
+        });
+        setWorkflows((prev) =>
+          prev.filter((workflow) => workflow.id !== workflowId)
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Hata!",
+        description: "Sunucu hatası lütfen tekrar deneyin",
+      });
+    }
+  };
 
   return (
     <Card className="w-2/3 mx-auto">
@@ -108,7 +138,11 @@ const WorkflowsPage = () => {
                           </AlertDialogHeader>
                           <AlertDialogFooter>
                             <AlertDialogCancel>İptal</AlertDialogCancel>
-                            <AlertDialogAction>Sil</AlertDialogAction>
+                            <AlertDialogAction
+                              onClick={() => deleteWorkflow(workflow.id)}
+                            >
+                              Sil
+                            </AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>
