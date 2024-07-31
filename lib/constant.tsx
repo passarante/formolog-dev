@@ -63,8 +63,8 @@ export const products = [
 export const menuOptions = [
   { name: "Dashboard", Component: Home, href: "/dashboard" },
   { name: "Projeler", Component: Workflows, href: "/workflows" },
-  { name: "Veritabanları", Component: Category, href: "/connections" },
-  { name: "Formlar", Component: Payment, href: "/billing" },
+  { name: "Veritabanları", Component: Category, href: "/databases" },
+  { name: "Formlar", Component: Payment, href: "/forms" },
   { name: "Şablonlar", Component: Templates, href: "/templates" },
   { name: "Loglar", Component: Logs, href: "/logs" },
   { name: "Ayarlar", Component: Settings, href: "/settings" },

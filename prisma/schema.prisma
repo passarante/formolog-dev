@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model WorkFlow{
+   id             String       @id @default(uuid())
+   name String 
+   userId String
+   company String
+   description String?
+   database Database?
+   createdAt      DateTime     @default(now())
+}
+
+model Database{
+   id             String       @id @default(uuid())
+   name String
+   description String?
+   
+   workflowId  String @unique
+   workflow WorkFlow @relation(fields: [workflowId],references: [id] ,onDelete: Cascade)
+
+   tables DatabaseTable[]
+   createdAt      DateTime     @default(now())
+}
+
+model DatabaseTable{
+    id             String       @id @default(uuid())
+   name String
+   description String?
+   databaseId  String @unique
+   database Database @relation(fields: [databaseId],references: [id] ,onDelete: Cascade)
+   fields TableField[]
+}
+
+model TableField{
+   id             String       @id @default(uuid())
+   name String
+   type String
+   tableId String @unique
+   table DatabaseTable @relation(fields: [tableId],references: [id] ,onDelete: Cascade)
+}

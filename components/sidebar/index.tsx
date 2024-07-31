@@ -13,7 +13,6 @@ import clsx from "clsx";
 import { Separator } from "../ui/separator";
 import { Database, GitBranch, LucideMousePointerClick } from "lucide-react";
 import { ModeToggle } from "../global/mode-toggle";
-import Image from "next/image";
 
 type Props = {};
 

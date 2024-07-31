@@ -14,7 +14,7 @@ const Layout = ({ children }: Props) => {
       <div className="w-full">
         <Image src={"/logo.png"} width={200} height={50} alt="logo" />
         <InfoBar />
-        {children}
+        <main className="p-6">{children}</main>
       </div>
     </div>
   );
