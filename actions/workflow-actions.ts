@@ -53,7 +53,7 @@ export const createWorkFlow = async (data: z.infer<typeof createWorkflowSchema>,
 
 
     } catch (error) {
-        console.log("Error", error);
+        console.log("Error", JSON.stringify(error));
         return { error };
     }
 }
