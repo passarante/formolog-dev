@@ -37,35 +37,35 @@ const modelTypes = {
   model: ModelNode,
 };
 
-// const initialNodes: Node[] = [
+// const initialNodes = [
 //   {
-//     id: defaultDbTables[1].name,
-//     data: defaultDbTables[1],
-//     position: { x: 100, y: 100 },
+//     id: "1",
+//     data: { label: "Hello" },
+//     position: { x: 0, y: 0 },
 //     type: "model",
 //   },
 //   {
-//     id: defaultDbTables[2].name,
-//     data: defaultDbTables[2],
-//     position: { x: 600, y: 100 },
-//     type: "model",
+//     id: "2",
+//     data: { label: "World" },
+//     position: { x: 100, y: 100 },
 //   },
 // ];
 
 const initialNodes: Node[] = [];
 
 const initialEdges: Edge[] = [
-  {
-    id: "Activity-CompanyId",
-    source: "Activity",
-    target: "Company",
-    sourceHandle: "Activity-CompanyId",
-    targetHandle: "Company",
-    animated: true,
-  },
+  // { id: "1-2", source: "1", target: "2", label: "to the", type: "step" },
+  // {
+  //   id: "Contact-CompanyId",
+  //   source: "Contact",
+  //   target: "Company",
+  //   sourceHandle: "Contact-CompanyId",
+  //   targetHandle: "Company",
+  //   animated: true,
+  // },
 ];
 
-function FlowDesigner2() {
+function Flow() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
   const [tables, setTables] = useState<DbTableType[]>(defaultDbTables);
@@ -95,19 +95,19 @@ function FlowDesigner2() {
         tables.filter((t) => t.name !== selectedTable.name)
       );
 
-      //   if (selectedTable.name == "Company") {
-      //     const newEdges = [
-      //       {
-      //         id: "Activity-CompanyId",
-      //         source: "Activity",
-      //         target: "Company",
-      //         sourceHandle: "Activity-CompanyId",
-      //         targetHandle: "Company",
-      //         animated: true,
-      //       },
-      //     ];
-      //     setEdges(newEdges);
-      //   }
+      if (selectedTable.name == "Company") {
+        const newEdges = [
+          {
+            id: "Activity-CompanyId",
+            source: "Activity",
+            target: "Company",
+            sourceHandle: "Activity-CompanyId",
+            targetHandle: "Company",
+            animated: true,
+          },
+        ];
+        setEdges(newEdges);
+      }
 
       setSelectedTable(null);
     }
@@ -119,8 +119,7 @@ function FlowDesigner2() {
       setSelectedTable(table[0]);
     }
   };
-  console.log(nodes);
-  console.log(edges);
+
   return (
     <div style={{ height: "100%" }}>
       <Dialog>
@@ -173,4 +172,4 @@ function FlowDesigner2() {
   );
 }
 
-export default FlowDesigner2;
+export default Flow;

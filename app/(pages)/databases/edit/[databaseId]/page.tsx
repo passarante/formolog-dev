@@ -9,9 +9,7 @@ import React, { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
-import { SchemaVisualizer } from "@/components/databases/SchemaVisualiser";
-import Flow from "@/components/databases/FlowDesigner";
-import FlowDesigner2 from "@/components/databases/FlowDesigner2";
+import FlowDesigner from "@/components/databases/FlowDesigner";
 
 const EditDatabasePage = () => {
   const { databaseId } = useParams();
@@ -41,15 +39,12 @@ const EditDatabasePage = () => {
             {database && (
               <CardTitle className="flex items-center justify-between ">
                 <span>Veritabanı: {database.name}</span>
-                <div>
-                  <Button>Yeni Tablo Oluştur</Button>
-                </div>
               </CardTitle>
             )}
           </CardHeader>
           <CardContent className="w-full h-[800px]">
             {/* <SchemaVisualizer /> */}
-            <FlowDesigner2 />
+            <FlowDesigner />
           </CardContent>
         </Card>
       </div>
